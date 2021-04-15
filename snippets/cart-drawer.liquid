@@ -164,6 +164,8 @@
         so that it is hidden but still available for use client-side by ajax-cart.js
         {% endcomment %}
 
+        
+
         {%- assign cartDiscounts = 'template ' | split: ' ' -%}
         {% if cart.cart_level_discount_applications.size > 0 %}
           {%- assign cartDiscounts = cart.cart_level_discount_applications -%}

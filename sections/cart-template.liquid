@@ -208,6 +208,10 @@
     </table>
 
     <footer class="cart-footer">
+    <div class="payment-info">
+      <p><span style="color: red;">&#9432;</span> Paypal is our only checkout method currently integrated, you can use it to checkout with your Paypal account or as a guest. It's super fast, easy and secure <strong>so don't let it ruin your summer wardrobe.</strong>
+        If you have any questions please email me <strong>gemma@signelondon.co.uk</strong></p>
+    </div>
       <div class="grid">
         {% if section.settings.cart_notes_enable %}
           <div class="grid__item medium-up--one-half cart-note">
@@ -272,6 +276,17 @@
     </footer>
   </form>
 </div>
+
+<style>
+  .payment-info {
+    display: none;
+    background-color: lightyellow;
+    border: solid 0.5px grey;
+    border-radius: 10px;
+    padding: 15px;
+    MARGIN-BOTTOM: 2REM;
+  }
+</style>
 
 {% schema %}
 {

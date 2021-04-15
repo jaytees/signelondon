@@ -54,6 +54,7 @@
         {% endif %}
       {% endif %}
     </div>
+    <a class="btn" href="{{ product.url | within: collection }}">view</a>
   {% else %}
     <div class="card__availability">
       {{ 'products.product.sold_out' | t }}
