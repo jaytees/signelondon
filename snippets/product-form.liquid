@@ -64,6 +64,11 @@
     {{ form | payment_button }}
   {% endif %}
 {% endform %}
+<div class="productStatus">
+   {% if current_variant.available and current_variant.inventory_quantity <= 0 %}
+      <span class="statusBackorder">Available on pre-order. Stock arriving in 2-3 weeks</span>
+   {% endif %}
+</div>
 <!-- </div> -->
 
 <style>
@@ -86,6 +91,11 @@
     .product__form-container-product-page .product__add-to-cart-button {
      margin-left: 0;
     }
+  }
+  .product-status {
+    text-align: center;
+    margin-left: 5rem;
+    margin-top: 1rem;
   }
   /* .purchase-form {
     display: grid;
