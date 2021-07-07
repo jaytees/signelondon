@@ -21,16 +21,16 @@
         </select>
       </div>
     {% endfor %}
+    
   {% endunless %}
 
   <select name="id" class="product-form__master-select supports-no-js" data-master-select>
     {% for variant in product.variants %}
       {% if variant.available %}
-
         {% comment %}
         Note: if you use option_selection.js, your select tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
         {% endcomment %}
-        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+        <option class="product-variant" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}" data-variant-id="{{ variant.id }}" data-variant-inventory-qty="{{ variant.inventory_quantity }}">>{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
 
       {% else %}
         <option disabled="disabled">
@@ -64,12 +64,11 @@
     {{ form | payment_button }}
   {% endif %}
 {% endform %}
-<div class="productStatus">
-   {% if current_variant.available and current_variant.inventory_quantity <= 0 %}
-      <span class="statusBackorder">Available on pre-order. Stock arriving in 2-3 weeks</span>
-   {% endif %}
+<div id="productStatus" class="">
+  <span class="statusBackorder">Available on pre-order. Stock arriving in 2-3 weeks</span>
 </div>
 <!-- </div> -->
+
 
 <style>
 
@@ -92,10 +91,14 @@
      margin-left: 0;
     }
   }
-  .productStatus {
+  #productStatus {
+    display: none;
     text-align: center;
     margin-left: 5rem;
     margin-top: 1rem;
+  }
+  #productStatus.active {
+    display: block;
   }
   /* .purchase-form {
     display: grid;

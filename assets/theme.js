@@ -3602,6 +3602,7 @@ var productDisplay = {
       this.$container.data('variant-id')
     );
 
+    this._toggleOutOfStockMessage(this.variant.id)
     this._formatVariantSelectors();
 
     this.on('submit', selectors$12.productForm, this._addItemToCart.bind(this));
@@ -3627,6 +3628,7 @@ var productDisplay = {
   },
 
   update: function() {
+    
     var $inputs = $(selectors$12.optionInputs, this.$container);
     var options = $inputs.serializeArray();
     var variant = product.getVariant(this.product, options);
@@ -3655,6 +3657,24 @@ var productDisplay = {
     morphdom(this.$container[0], this._updatedContainer(this.variant));
 
     this.trigger('variant_change', [this.product, variant]);
+
+    this._toggleOutOfStockMessage(variant.id)
+  },
+
+  _toggleOutOfStockMessage: function (selectedVariantId) {
+    const variantElms = document.querySelectorAll('.product-variant');
+
+    variantElms.forEach(function(variantElm) {
+        let variantId = parseInt(variantElm.dataset.variantId);
+        let variantInventoryQty = parseInt(variantElm.dataset.variantInventoryQty);
+        // find the matching product
+        if (selectedVariantId === variantId && variantInventoryQty <= 0) {
+          // show message
+          return document.getElementById('productStatus').classList.add('active');
+        } else if (selectedVariantId === variantId && variantInventoryQty > 0) {
+          return document.getElementById('productStatus').classList.remove('active');
+        }
+    });
   },
 
   _preloadVariantMediaImages: function() {
